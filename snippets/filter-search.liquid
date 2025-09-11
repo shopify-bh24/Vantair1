@@ -1,0 +1,75 @@
+<style>
+    .product-filters{
+        padding: 1.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        align-items: center;
+        background: white;
+        border-radius: 8px;
+    }
+
+    .product-filters select,input,option{
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #888888;
+    }
+
+    .product-filters select:focus-visible,input:focus-visible{
+        outline: none;
+        outline-offset: none;
+        box-shadow: none;
+    }
+
+    /* .product-filters input{
+        padding: 8px 12px;
+    } */
+</style>
+
+<div class="product-filters page-width">
+  <!-- Dropdown for Type -->
+  <label for="type-filter" class="filter-label">Filter by type:</label>
+  <select id="type-filter" class="filter-select">
+    <option value="">All</option>
+    <option value="buy">Buy</option>
+    <option value="development">Development</option>
+    <option value="sell">Sell</option>
+  </select>
+
+  <!-- Keyword Search -->
+  <label for="keyword-search" class="filter-label">Search by keyword:</label>
+  <input type="text" id="keyword-search" class="filter-input" placeholder="Enter keyword...">
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const typeFilter = document.getElementById("type-filter");
+  const keywordSearch = document.getElementById("keyword-search");
+  const productCards = document.querySelectorAll(".product-card-wrapper");
+
+  function filterProducts() {
+    const typeValue = typeFilter.value.toLowerCase();
+    const keywordValue = keywordSearch.value.toLowerCase();
+
+    productCards.forEach(card => { 
+      const titleEl = card.querySelector(".card__heading a");
+      const titleText = titleEl ? titleEl.textContent.toLowerCase() : "";
+
+      // metafield custom.type rendered as data-attribute on wrapper
+      const typeAttr = card.getAttribute("data-type")?.toLowerCase() || "";
+
+      const matchesType = !typeValue || typeAttr.includes(typeValue);
+      const matchesKeyword = !keywordValue || titleText.includes(keywordValue);
+
+      if (matchesType && matchesKeyword) {
+        card.style.display = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  typeFilter.addEventListener("change", filterProducts);
+  keywordSearch.addEventListener("input", filterProducts);
+});
+</script>
