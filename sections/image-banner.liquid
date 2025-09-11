@@ -1,5 +1,12 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
+<style>
+  .filter-search-wrapper{
+    display: flex;
+    flex-direction: column;
+  }
+</style>
+
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
   {%- style -%}
     @media screen and (max-width: 749px) {
@@ -139,11 +146,15 @@
         {%- endcase -%}
       {%- endfor -%}
     </div>
-    {% render 'filter-search' %}
+    <div class="filter-search-wrapper">
+      {% render 'filter-search' %}
+    </div>
+    
   </div>
 </div>
 
 {% schema %}
+ 
   {
     "name": "t:sections.image-banner.name",
     "tag": "section",
@@ -152,6 +163,20 @@
       "groups": ["header", "footer"]
     },
     "settings": [
+      {
+        "type": "text",
+        "id": "search_header",
+        "label": "Search Header"
+      },
+      {
+        "type": "range",
+        "id": "search_header_font_size",
+        "label": "Search Header Font Size",
+        "min": 12,
+        "max": 64,
+        "step": 4,
+        "default": 20
+      },
       {
         "type": "image_picker",
         "id": "image",

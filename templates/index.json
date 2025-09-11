@@ -12,6 +12,8 @@
     "image_banner": {
       "type": "image-banner",
       "settings": {
+        "search_header": "",
+        "search_header_font_size": 20,
         "image_overlay_opacity": 40,
         "image_height": "large",
         "image_behavior": "none",
@@ -51,10 +53,127 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "collage_WmxYVP": {
+      "type": "collage",
+      "blocks": {
+        "image_6mngGk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/imagereader.webp"
+          }
+        },
+        "product_qAFqrj": {
+          "type": "product",
+          "settings": {
+            "product": "c",
+            "second_image": false
+          }
+        },
+        "collection_7qFMXQ": {
+          "type": "collection",
+          "settings": {
+            "collection": "all"
+          }
+        }
+      },
+      "block_order": [
+        "image_6mngGk",
+        "product_qAFqrj",
+        "collection_7qFMXQ"
+      ],
+      "name": "t:sections.collage.presets.name",
+      "settings": {
+        "heading": "Multimedia collage",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "slideshow_LGF9ea": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_6hDPk8": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/jll-21175160-1.webp",
+            "image_overlay_opacity": 0,
+            "heading": "Buy",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide_ezM3gd": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/jll-21220441-4.webp",
+            "image_overlay_opacity": 0,
+            "heading": "Development",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": "scheme-1"
+          }
+        },
+        "slide_6tNYyY": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/castel-20727844-2.webp",
+            "image_overlay_opacity": 0,
+            "heading": "Sell your house",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Button label",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_6hDPk8",
+        "slide_ezM3gd",
+        "slide_6tNYyY"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "large",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "ambient",
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "collage_WmxYVP",
+    "slideshow_LGF9ea"
   ]
 }

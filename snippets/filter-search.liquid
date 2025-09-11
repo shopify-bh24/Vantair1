@@ -21,19 +21,39 @@
         box-shadow: none;
     }
 
+    h1{
+      font-size: {{section.settings.search_header_font_size}}px;
+    }
+
     /* .product-filters input{
         padding: 8px 12px;
     } */
 </style>
 
+<h1 style="color: white;">{{ section.settings.search_header }}</h1> 
+
 <div class="product-filters page-width">
   <!-- Dropdown for Type -->
-  <label for="type-filter" class="filter-label">Filter by type:</label>
+  {% comment %} <label for="type-filter" class="filter-label">Filter by type:</label> {% endcomment %}
   <select id="type-filter" class="filter-select">
-    <option value="">All</option>
+    <option value="">Select Type</option>
     <option value="buy">Buy</option>
     <option value="development">Development</option>
     <option value="sell">Sell</option>
+  </select>
+
+  <select id="typology-filter" class="filter-select">
+    <option value="">Select Typology</option>
+    <option value="buy">Houses</option>
+    <option value="development">Commercial</option>
+    <option value="sell">Apartments</option>
+  </select>
+
+  <select id="region-filter" class="filter-select">
+    <option value="">Select Region</option>
+    <option value="buy">Lisboa</option>
+    <option value="development">Porto</option>
+    <option value="sell">Algarve</option>
   </select>
 
   <!-- Keyword Search -->
@@ -41,15 +61,24 @@
   <input type="text" id="keyword-search" class="filter-input" placeholder="Enter keyword...">
 </div>
 
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const typeFilter = document.getElementById("type-filter");
+  const regionFilter = document.getElementById("region-filter");
+  const typologyFilter = document.getElementById("typology-filter")
+
   const keywordSearch = document.getElementById("keyword-search");
   const productCards = document.querySelectorAll(".product-card-wrapper");
+  const noProductsMessage = document.getElementById("no-products-message");
 
   function filterProducts() {
     const typeValue = typeFilter.value.toLowerCase();
+    const regionValue = regionFilter.value.toLowerCase();
+    const typologyValue = typologyFilter.value.toLowerCase();
+
     const keywordValue = keywordSearch.value.toLowerCase();
+    let visibleCount = 0;
 
     productCards.forEach(card => { 
       const titleEl = card.querySelector(".card__heading a");
@@ -57,19 +86,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // metafield custom.type rendered as data-attribute on wrapper
       const typeAttr = card.getAttribute("data-type")?.toLowerCase() || "";
+      const regionAttr = card.getAttribute("data-type")?.toLowerCase() || "";
+      const typologyAttr = card.getAttribute("data-type")?.toLowerCase() || "";
 
-      const matchesType = !typeValue || typeAttr.includes(typeValue);    
+      const matchesType = !typeValue || typeAttr.includes(typeValue);
+      const matchesRegion = !regionValue || regionAttr.includes(regionValue);
+      const matchesTypology = !typologyValue || typologyAttr.includes(typologyValue);
+      
       const matchesKeyword = !keywordValue || titleText.includes(keywordValue);
 
-      if (matchesType && matchesKeyword) {
-        card.style.display = "";
+      const parentLi = card.closest("li");
+      if (matchesType && matchesRegion && matchesTypology && matchesKeyword) {
+        if (parentLi) parentLi.style.display = "";
+        visibleCount++;
+
       } else {
-        card.style.display = "none";
+        if (parentLi) parentLi.style.display = "none";
       }
+
     });
+
+    if(noProductsMessage) {
+      noProductsMessage.style.display = visibleCount === 0 ? "block" : "none";
+    }
   }
 
   typeFilter.addEventListener("change", filterProducts);
+  regionFilter.addEventListener("change", filterProducts);
+  typologyFilter.addEventListener("change", filterProducts);
   keywordSearch.addEventListener("input", filterProducts);
 });
 </script>
