@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // metafield custom.type rendered as data-attribute on wrapper
       const typeAttr = card.getAttribute("data-type")?.toLowerCase() || "";
 
-      const matchesType = !typeValue || typeAttr.includes(typeValue);
+      const matchesType = !typeValue || typeAttr.includes(typeValue);  
       const matchesKeyword = !keywordValue || titleText.includes(keywordValue);
 
       if (matchesType && matchesKeyword) {
