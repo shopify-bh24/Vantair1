@@ -1,11 +1,12 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 <style>
-  .filter-search-wrapper{
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    bottom: 4rem;
+  .banner__box{
+    background: none;
+  }
+
+  .banner__heading{
+    color: white;
   }
 </style>
 
@@ -166,15 +167,6 @@
         "type": "text",
         "id": "search_header",
         "label": "Search Header"
-      },
-      {
-        "type": "range",
-        "id": "search_header_font_size",
-        "label": "Search Header Font Size",
-        "min": 12,
-        "max": 64,
-        "step": 4,
-        "default": 20
       },
       {
         "type": "image_picker",

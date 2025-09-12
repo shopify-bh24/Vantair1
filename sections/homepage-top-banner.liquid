@@ -4,6 +4,16 @@
   .filter-search-wrapper{
     display: flex;
     flex-direction: column;
+    position: absolute;
+    bottom: 4rem;
+  }
+
+  .banner__media{
+    background: black;
+  }
+  
+  .banner__media img{
+    opacity: 0.4;
   }
 </style>
 
@@ -176,6 +186,15 @@
         "max": 64,
         "step": 4,
         "default": 20
+      },
+      {
+        "type": "range",
+        "id": "search_header_margin_bottom",
+        "label": "Search Header Margin Bottom",
+        "min": 0,
+        "max": 64,
+        "default": 12,
+        "step": 4
       },
       {
         "type": "image_picker",

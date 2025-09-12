@@ -13,8 +13,9 @@
       "type": "homepage-top-banner",
       "name": "t:sections.image-banner.presets.name",
       "settings": {
-        "search_header": "",
-        "search_header_font_size": 20,
+        "search_header": "Looking for a place to live your story? We can help.",
+        "search_header_font_size": 56,
+        "search_header_margin_bottom": 20,
         "image": "shopify://shop_images/Superb-Villa-Eden-in-Quinta-do-Lago.avif",
         "image_overlay_opacity": 0,
         "image_height": "large",
@@ -456,12 +457,13 @@
         "heading_Hdn7CW": {
           "type": "heading",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h1"
+            "heading": "<strong>Our commitment, your opportunity.</strong>",
+            "heading_size": "h0"
           }
         },
         "text_nzmWVD": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "Give customers details about the banner image(s) or content on the template.",
             "text_style": "body"
@@ -469,6 +471,7 @@
         },
         "buttons_RKHN9f": {
           "type": "buttons",
+          "disabled": true,
           "settings": {
             "button_label_1": "Button label",
             "button_link_1": "",
@@ -487,10 +490,10 @@
       "name": "t:sections.image-banner.presets.name",
       "settings": {
         "search_header": "",
-        "search_header_font_size": 20,
+        "image": "shopify://shop_images/29.avif",
         "image_overlay_opacity": 0,
-        "image_height": "medium",
-        "image_behavior": "none",
+        "image_height": "small",
+        "image_behavior": "fixed",
         "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
         "show_text_box": true,
