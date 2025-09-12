@@ -1,1 +1,71 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer","settings":{"color_scheme":"scheme-1","newsletter_enable":true,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":true,"show_social":true,"enable_country_selector":true,"enable_language_selector":true,"payment_enable":true,"show_policy":true,"margin_top":0,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "link_list_EBXbHK": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Properties by Type",
+            "menu": "properties-by-type"
+          }
+        },
+        "link_list_qzUE6T": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Properties by Region",
+            "menu": "properties-by-region"
+          }
+        },
+        "link_list_mCyBKj": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Properties by Typology",
+            "menu": "properties-by-typology"
+          }
+        },
+        "link_list_PqN9pN": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Vantair",
+            "menu": "other"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_EBXbHK",
+        "link_list_qzUE6T",
+        "link_list_mCyBKj",
+        "link_list_PqN9pN"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

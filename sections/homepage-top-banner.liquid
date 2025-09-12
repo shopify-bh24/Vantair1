@@ -4,8 +4,6 @@
   .filter-search-wrapper{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    bottom: 4rem;
   }
 </style>
 
@@ -147,6 +145,9 @@
             </div>
         {%- endcase -%}
       {%- endfor -%}
+    </div>
+    <div class="filter-search-wrapper">
+      {% render 'filter-search' %}
     </div>
     
   </div>

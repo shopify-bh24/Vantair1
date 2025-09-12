@@ -5,6 +5,17 @@
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
 
+<style>
+  .list-menu{
+    gap: 2rem;
+  }
+
+  .header__menu-item{
+    font-size: 16px;
+    font-weight: bold;
+  }
+</style>
+
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}

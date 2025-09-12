@@ -3,7 +3,7 @@
   position: relative;
   flex-direction: column;
   z-index: auto;
-  isolation: isolate;
+  /* isolation: isolate; */
 }
 
 .banner__box {

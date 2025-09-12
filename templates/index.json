@@ -9,21 +9,23 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "homepage_top_banner_mUW34W": {
+      "type": "homepage-top-banner",
+      "name": "t:sections.image-banner.presets.name",
       "settings": {
         "search_header": "",
         "search_header_font_size": 20,
-        "image_overlay_opacity": 40,
+        "image": "shopify://shop_images/Superb-Villa-Eden-in-Quinta-do-Lago.avif",
+        "image_overlay_opacity": 0,
         "image_height": "large",
-        "image_behavior": "none",
-        "desktop_content_position": "bottom-center",
+        "image_behavior": "fixed",
+        "desktop_content_position": "middle-center",
         "desktop_content_alignment": "center",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "show_text_below": false
+        "show_text_below": true
       }
     },
     "featured_collection": {
@@ -31,9 +33,9 @@
       "settings": {
         "collection": "all",
         "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
+        "title": "Explore Our Properties",
+        "heading_size": "h1",
+        "description": "<p>Browse through our full collection of homes for sale, rentals, and development opportunities.</p>",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
@@ -52,6 +54,49 @@
         "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
+      }
+    },
+    "rich_text_AkJGJx": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_EtNaUC": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_M4HecW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_BmbmnF": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_EtNaUC",
+        "text_M4HecW",
+        "button_BmbmnF"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
       }
     },
     "collage_WmxYVP": {
@@ -73,7 +118,7 @@
         "collection_7qFMXQ": {
           "type": "collection",
           "settings": {
-            "collection": "all"
+            "collection": "lisboa"
           }
         }
       },
@@ -82,14 +127,15 @@
         "product_qAFqrj",
         "collection_7qFMXQ"
       ],
+      "disabled": true,
       "name": "t:sections.collage.presets.name",
       "settings": {
-        "heading": "Multimedia collage",
+        "heading": "<strong>Properties in Lisboa</strong>",
         "heading_size": "h1",
         "desktop_layout": "left",
-        "mobile_layout": "column",
+        "mobile_layout": "collage",
         "card_styles": "product-card-wrapper",
-        "color_scheme": "",
+        "color_scheme": "scheme-2",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -102,11 +148,11 @@
           "settings": {
             "image": "shopify://shop_images/jll-21175160-1.webp",
             "image_overlay_opacity": 0,
-            "heading": "Buy",
+            "heading": "Find Your Dream Home",
             "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
+            "subheading": "Browse properties available for sale in your area.",
+            "button_label": "Start Buying",
+            "link": "shopify://collections/buy",
             "button_style_secondary": false,
             "show_text_box": true,
             "box_align": "middle-center",
@@ -120,11 +166,11 @@
           "settings": {
             "image": "shopify://shop_images/jll-21220441-4.webp",
             "image_overlay_opacity": 0,
-            "heading": "Development",
+            "heading": "Discover Your Next Rental",
             "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
+            "subheading": "Explore apartments and houses for rent that fit your lifestyle.",
+            "button_label": "View Rentals",
+            "link": "shopify://collections/sell",
             "button_style_secondary": false,
             "show_text_box": true,
             "box_align": "middle-center",
@@ -132,30 +178,11 @@
             "text_alignment_mobile": "center",
             "color_scheme": "scheme-1"
           }
-        },
-        "slide_6tNYyY": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/castel-20727844-2.webp",
-            "image_overlay_opacity": 0,
-            "heading": "Sell your house",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Button label",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
         }
       },
       "block_order": [
         "slide_6hDPk8",
-        "slide_ezM3gd",
-        "slide_6tNYyY"
+        "slide_ezM3gd"
       ],
       "name": "t:sections.slideshow.presets.name",
       "settings": {
@@ -168,12 +195,388 @@
         "show_text_below": true,
         "accessibility_info": "Slideshow about our brand"
       }
+    },
+    "rich_text_B6VBRY": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_9XXMeF": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_AtXCHq": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_VqFiMj": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_9XXMeF",
+        "text_AtXCHq",
+        "button_VqFiMj"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_with_text_B4VfVr": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Mw3MHU": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Properties in Lisboa</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_ytTHax": {
+          "type": "text",
+          "settings": {
+            "text": "<p><br/>Discover our curated selection of homes, apartments, and commercial spaces available in the heart of Lisboa. From modern city apartments to charming traditional houses, these properties combine convenience with the rich culture of Portugal’s capital. Whether you’re looking to buy your first home, rent a stylish flat, or invest in commercial real estate, Lisboa offers a wide variety of opportunities to match your lifestyle and needs.<br/><br/></p>",
+            "text_style": "body"
+          }
+        },
+        "button_pwxD7R": {
+          "type": "button",
+          "settings": {
+            "button_label": "Discover More in Lisboa",
+            "button_link": "shopify://collections/lisboa",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mw3MHU",
+        "text_ytTHax",
+        "button_pwxD7R"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/ID330f7d01-0000-0500-0000-0000132588d8.jpg",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_8bJ3yY": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_LyAdyq": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_7Ghpf6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_pKYYPC": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_LyAdyq",
+        "text_7Ghpf6",
+        "button_pKYYPC"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "image_with_text_kjg7tK": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_gYXWAe": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Properties in Porto</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text_mfAdRU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Experience the charm of Porto with a wide range of properties available across the city. From riverside apartments with stunning views of the Douro to elegant houses in historic neighborhoods, Porto offers a perfect mix of tradition and modern living. Whether you’re investing, relocating, or renting, you’ll find a property that matches your lifestyle.</p>",
+            "text_style": "body"
+          }
+        },
+        "button_xcC4th": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore Porto Homes",
+            "button_link": "shopify://collections/porto",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_gYXWAe",
+        "text_mfAdRU",
+        "button_xcC4th"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/jll-21175160-1.webp",
+        "height": "medium",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "overlap",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text_mGYfVY": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_3RiMUV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h1"
+          }
+        },
+        "text_NJQcfk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_i3jqhA": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "",
+            "button_style_secondary": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_3RiMUV",
+        "text_NJQcfk",
+        "button_i3jqhA"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "featured_blog_UCRiYX": {
+      "type": "featured-blog",
+      "name": "t:sections.featured-blog.presets.name",
+      "settings": {
+        "blog": "",
+        "post_limit": 3,
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "show_view_all": true,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "contact_form_GQ3gNB": {
+      "type": "contact-form",
+      "name": "t:sections.contact-form.presets.name",
+      "settings": {
+        "heading": "Contact form",
+        "heading_size": "h1",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner_KdiQkt": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Hdn7CW": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "text_nzmWVD": {
+          "type": "text",
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_RKHN9f": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_Hdn7CW",
+        "text_nzmWVD",
+        "buttons_RKHN9f"
+      ],
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "search_header": "",
+        "search_header_font_size": 20,
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
+    "collapsible_content_QYaF3P": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_8XUQVf": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_gCztVD": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_DkfEJU": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_XJTz8n": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "none",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_8XUQVf",
+        "collapsible_row_gCztVD",
+        "collapsible_row_DkfEJU",
+        "collapsible_row_XJTz8n"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "<strong>FAQ</strong>",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
-    "image_banner",
+    "homepage_top_banner_mUW34W",
     "featured_collection",
+    "rich_text_AkJGJx",
     "collage_WmxYVP",
-    "slideshow_LGF9ea"
+    "slideshow_LGF9ea",
+    "rich_text_B6VBRY",
+    "image_with_text_B4VfVr",
+    "rich_text_8bJ3yY",
+    "image_with_text_kjg7tK",
+    "rich_text_mGYfVY",
+    "featured_blog_UCRiYX",
+    "contact_form_GQ3gNB",
+    "image_banner_KdiQkt",
+    "collapsible_content_QYaF3P"
   ]
 }

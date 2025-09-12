@@ -1,119 +1,300 @@
 <style>
-    .product-filters{
-        padding: 1.5rem;
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        align-items: center;
-        background: white;
-        border-radius: 8px;
-    }
+  .product-filters {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
 
-    .product-filters select,input,option{
-        padding: 8px 12px;
-        border-radius: 8px;
-        border: 1px solid #888888;
-    }
+  .filter-input {
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid #888888;
+  }
 
-    .product-filters select:focus-visible,input:focus-visible{
-        outline: none;
-        outline-offset: none;
-        box-shadow: none;
-    }
+  .filter-input:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
 
-    h1{
-      font-size: {{section.settings.search_header_font_size}}px;
-    }
+  /* Switch toggle */
+  .switch-input {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    position: absolute;
+  }
 
-    /* .product-filters input{
-        padding: 8px 12px;
-    } */
+  .switch-label {
+    cursor: pointer;
+    width: 160px;
+    height: 44px;
+    background: white;
+    border-radius: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    user-select: none;
+    overflow: hidden;
+  }
+
+  .switch-label::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: 36px;
+    background: #101010;
+    border-radius: 30px;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    z-index: 1;
+  }
+
+  .switch-text {
+    flex: 1;
+    text-align: center;
+    z-index: 2;
+    transition: color 0.25s ease;
+  }
+
+  .switch-text.buy { color: #fff; }
+  .switch-text.rent { color: #555; }
+
+  .switch-input:checked + .switch-label::before {
+    transform: translateX(100%);
+  }
+
+  .switch-input:checked + .switch-label .buy { color: #555; }
+  .switch-input:checked + .switch-label .rent { color: #fff; }
+
+  /* Custom dropdowns */
+  .custom-filters { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .custom-dropdown {
+    position: relative;
+    width: 180px;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+  }
+
+  .dropdown-btn {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .arrow { transition: transform 0.3s ease; }
+  .custom-dropdown.open .arrow { transform: rotate(180deg); }
+
+  .dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 8px;
+    left: 0;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .dropdown-menu.open-down {
+    top: 100%;
+    bottom: auto;
+    max-height: 300px;
+    opacity: 1;
+  }
+
+  .dropdown-menu.open-up {
+    bottom: 100%;
+    top: auto;
+    max-height: 300px;
+    opacity: 1;
+  }
+
+  .dropdown-menu li {
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .dropdown-menu li:hover { background: #f0f0f0; }
 </style>
 
-<h1 style="color: white;">{{ section.settings.search_header }}</h1> 
-
 <div class="product-filters page-width">
-  <!-- Dropdown for Type -->
-  {% comment %} <label for="type-filter" class="filter-label">Filter by type:</label> {% endcomment %}
-  <select id="type-filter" class="filter-select">
-    <option value="">Select Type</option>
-    <option value="buy">Buy</option>
-    <option value="development">Development</option>
-    <option value="sell">Sell</option>
-  </select>
+  <div class="switch-container">
+    <input type="checkbox" id="type-switch" class="switch-input" />
+    <label for="type-switch" class="switch-label">
+      <span class="switch-text buy">Buy</span>
+      <span class="switch-text rent">Rent</span>
+    </label>
+  </div>
 
-  <select id="typology-filter" class="filter-select">
-    <option value="">Select Typology</option>
-    <option value="buy">Houses</option>
-    <option value="development">Commercial</option>
-    <option value="sell">Apartments</option>
-  </select>
+  <div class="custom-filters">
+    <div class="custom-dropdown" id="typology-dropdown">
+      <button class="dropdown-btn" data-value="">Select Typology <span class="arrow">&#9662;</span></button>
+      <ul class="dropdown-menu">
+        <li data-value="">All</li>
+        <li data-value="houses">Houses</li>
+        <li data-value="commercial">Commercial</li>
+        <li data-value="apartments">Apartments</li>
+      </ul>
+    </div>
 
-  <select id="region-filter" class="filter-select">
-    <option value="">Select Region</option>
-    <option value="buy">Lisboa</option>
-    <option value="development">Porto</option>
-    <option value="sell">Algarve</option>
-  </select>
+    <div class="custom-dropdown" id="region-dropdown">
+      <button class="dropdown-btn" data-value="">Select Region <span class="arrow">&#9662;</span></button>
+      <ul class="dropdown-menu">
+        <li data-value="">All</li>
+        <li data-value="lisboa">Lisboa</li>
+        <li data-value="porto">Porto</li>
+        <li data-value="algarve">Algarve</li>
+      </ul>
+    </div>
+  </div>
 
-  <!-- Keyword Search -->
-  <label for="keyword-search" class="filter-label">Search by keyword:</label>
   <input type="text" id="keyword-search" class="filter-input" placeholder="Enter keyword...">
 </div>
 
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const typeFilter = document.getElementById("type-filter");
-  const regionFilter = document.getElementById("region-filter");
-  const typologyFilter = document.getElementById("typology-filter")
-
+  const switchEl = document.getElementById("type-switch");
+  const typologyDropdown = document.getElementById("typology-dropdown");
+  const regionDropdown = document.getElementById("region-dropdown");
   const keywordSearch = document.getElementById("keyword-search");
-  const productCards = document.querySelectorAll(".product-card-wrapper");
-  const noProductsMessage = document.getElementById("no-products-message");
+  const noproductMsg = document.getElementById("no-products-message");
+
+  function getCurrentType() {
+    return switchEl.checked ? "rent" : "buy";
+  }
+
+  function getDropdownValue(dropdown) {
+    const btn = dropdown.querySelector('.dropdown-btn');
+    return btn.getAttribute('data-value') || '';
+  }
+
+  function getProductCards() {
+    return Array.from(document.querySelectorAll(".product-grid .product-card-wrapper"));
+  }
 
   function filterProducts() {
-    const typeValue = typeFilter.value.toLowerCase();
-    const regionValue = regionFilter.value.toLowerCase();
-    const typologyValue = typologyFilter.value.toLowerCase();
+    const typeValue = getCurrentType().toLowerCase();
+    const typologyValue = getDropdownValue(typologyDropdown).toLowerCase();
+    const regionValue = getDropdownValue(regionDropdown).toLowerCase();
+    const keywordValue = (keywordSearch.value || "").toLowerCase();
 
-    const keywordValue = keywordSearch.value.toLowerCase();
     let visibleCount = 0;
 
-    productCards.forEach(card => { 
-      const titleEl = card.querySelector(".card__heading a");
-      const titleText = titleEl ? titleEl.textContent.toLowerCase() : "";
+    getProductCards().forEach(card => {
+      const titleText = (card.querySelector(".card__heading a, .card__heading")?.textContent || "").toLowerCase();
+      const typeAttr = (card.dataset.type || "").toLowerCase();
+      const typologyAttr = (card.dataset.typology || "").toLowerCase();
+      const regionAttr = (card.dataset.region || "").toLowerCase();
 
-      // metafield custom.type rendered as data-attribute on wrapper
-      const typeAttr = card.getAttribute("data-type")?.toLowerCase() || "";
-      const regionAttr = card.getAttribute("data-type")?.toLowerCase() || "";
-      const typologyAttr = card.getAttribute("data-type")?.toLowerCase() || "";
+      const show = (!typeValue || typeAttr.includes(typeValue)) &&
+                   (!typologyValue || typologyAttr.includes(typologyValue)) &&
+                   (!regionValue || regionAttr.includes(regionValue)) &&
+                   (!keywordValue || titleText.includes(keywordValue));
 
-      const matchesType = !typeValue || typeAttr.includes(typeValue);
-      const matchesRegion = !regionValue || regionAttr.includes(regionValue);
-      const matchesTypology = !typologyValue || typologyAttr.includes(typologyValue);
-      
-      const matchesKeyword = !keywordValue || titleText.includes(keywordValue);
-
-      const parentLi = card.closest("li");
-      if (matchesType && matchesRegion && matchesTypology && matchesKeyword) {
-        if (parentLi) parentLi.style.display = "";
+      const parentLi = card.closest("li") || card;
+      if (show) {
+        parentLi.style.display = "";
         visibleCount++;
-
       } else {
-        if (parentLi) parentLi.style.display = "none";
+        parentLi.style.display = "none";
       }
-
     });
 
-    if(noProductsMessage) {
-      noProductsMessage.style.display = visibleCount === 0 ? "block" : "none";
+    if (noproductMsg) {
+      noproductMsg.style.display = visibleCount === 0 ? "block" : "none";
     }
   }
 
-  typeFilter.addEventListener("change", filterProducts);
-  regionFilter.addEventListener("change", filterProducts);
-  typologyFilter.addEventListener("change", filterProducts);
+  // Switch filter
+  switchEl.addEventListener("change", filterProducts);
   keywordSearch.addEventListener("input", filterProducts);
+
+  // Dropdown logic
+  document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+    const btn = dropdown.querySelector('.dropdown-btn');
+    const menu = dropdown.querySelector('.dropdown-menu');
+
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      // close others
+      document.querySelectorAll('.custom-dropdown').forEach(d => {
+        if (d !== dropdown) {
+          d.classList.remove('open');
+          d.querySelector('.dropdown-menu').classList.remove('open-up','open-down');
+        }
+      });
+
+      dropdown.classList.toggle('open');
+
+      if (dropdown.classList.contains('open')) {
+        const rect = btn.getBoundingClientRect();
+        const spaceAbove = rect.top;
+        const spaceBelow = window.innerHeight - rect.bottom;
+
+        if (spaceBelow < 200 && spaceAbove > spaceBelow) {
+          menu.classList.add("open-up");
+          menu.classList.remove("open-down");
+        } else {
+          menu.classList.add("open-down");
+          menu.classList.remove("open-up");
+        }
+      } else {
+        menu.classList.remove("open-up","open-down");
+      }
+    });
+
+    // select value
+    menu.querySelectorAll('li').forEach(item => {
+      item.addEventListener('click', () => {
+        btn.innerHTML = item.textContent + ' <span class="arrow">&#9662;</span>';
+        btn.setAttribute('data-value', item.getAttribute('data-value'));
+        dropdown.classList.remove('open');
+        menu.classList.remove("open-up","open-down");
+        filterProducts();
+      });
+    });
+  });
+
+  // Close dropdowns if click outside
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        dropdown.querySelector('.dropdown-menu').classList.remove('open-up','open-down');
+      }
+    });
+  });
+
+  filterProducts();
 });
 </script>
