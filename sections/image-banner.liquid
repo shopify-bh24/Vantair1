@@ -1,13 +1,24 @@
 {{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
 
 <style>
-  .banner__box{
+  .banner__content .banner__box{
     background: none;
   }
 
-  .banner__heading{
+  .banner__content .banner__heading{
     color: white;
+    font-style: italic;
+    font-family: none;
   }
+
+  .banner__media{
+    background: black;
+  }
+  
+  .banner__media img{
+    opacity: 0.4;
+  }
+  
 </style>
 
 {%- if section.settings.image_height == 'adapt' and section.settings.image != blank -%}
