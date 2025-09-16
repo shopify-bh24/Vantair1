@@ -352,9 +352,9 @@
         "explanation": "See why our customers trust us and love working with us."
       }
     },
-    "contact_form_GQ3gNB": {
-      "type": "contact-form",
-      "name": "t:sections.contact-form.presets.name",
+    "custom_contact_form_section_adnkKM": {
+      "type": "custom-contact-form-section",
+      "name": "Custom Contact Form",
       "settings": {
         "image": "shopify://shop_images/sculpture_1_1.png",
         "subtitle": "Get in Touch",
@@ -364,7 +364,7 @@
         "company_phone": "+1 (555) 123-4567",
         "company_email_label": "Email Us",
         "company_email": "support@example.com",
-        "button_label": "SEND MESSAGE",
+        "button_label": "Send Message",
         "color_scheme": ""
       }
     },
@@ -494,7 +494,7 @@
     "explore_section_eyJ9ge",
     "grid_image_section_AQwwFD",
     "testimonial_h8Rkmq",
-    "contact_form_GQ3gNB",
+    "custom_contact_form_section_adnkKM",
     "image_banner_KdiQkt",
     "collapsible_content_QYaF3P"
   ]
