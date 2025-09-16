@@ -1,0 +1,337 @@
+<style>
+  .testimonial-section {
+    padding: 8rem 4rem;
+    background: #f9f9f9;
+    font-family: Arial
+    , sans-serif;
+  }
+
+  .testimonial-container {
+    max-width: 1440px;
+    margin: auto;
+  }
+
+  .testimonial-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #015068;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .testimonial-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #111;
+  }
+
+  .testimonial-explanation {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 500px;
+    text-align: right;
+    margin: 0;
+  }
+
+  /* Slider container */
+  .testimonial-slider {
+    display: flex;
+    flex-wrap: nowrap;
+    /* prevent wrapping so overflow occurs */
+    overflow-x: auto;
+    /* enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* smooth touch scrolling on iOS */
+    scroll-snap-type: x mandatory;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    scroll-behavior: smooth;
+    /* smooth programmatic scroll */
+    touch-action: pan-x;
+    /* prioritize horizontal panning on touch devices */
+
+    /* hide native scrollbar but keep scrollability accessible */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    justify-content: space-between;
+  }
+  .testimonial-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Slide */
+  .testimonial-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2rem;
+    scroll-snap-align: start;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    min-width: 320px;
+    border-radius: 12px;
+    justify-content: space-between;
+  }
+
+  .testimonial-review-icon {
+    width: 100px;
+    display: block;
+  }
+
+  .testimonial-feedback {
+    font-size: 1.3rem;
+    color: #333;
+    font-style: italic;
+    margin: 0 0 2rem;
+    line-height: 1.6;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .testimonial-info {
+    text-align: left;
+  }
+
+  .testimonial-name {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #111;
+    margin: 0;
+  }
+
+  .testimonial-saying-icon {
+    width: 24px;
+    opacity: 0.7;
+  }
+
+  /* Scrollbar hidden for cleaner look */
+  .testimonial-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider-prev,
+  .slider-next {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    padding: 0.4rem 1.2rem;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+
+</style>
+
+<section class="testimonial-section info-section">
+  <div class="testimonial-container">
+
+    <!-- Subtitle -->
+    {% if section.settings.subtitle != blank %}
+      <h3 class="section_subtitle">{{ section.settings.subtitle }}</h3>
+    {% endif %}
+
+    <!-- Title & Explanation -->
+    <div class="testimonial-header">
+      {% if section.settings.title != blank %}
+        <h2 class="section-title" style="margin-bottom: 0;">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.explanation != blank %}
+        <p class="testimonial-explanation">{{ section.settings.explanation }}</p>
+      {% endif %}
+    </div>
+
+    <!-- Slider -->
+    <div class="testimonial-slider">
+      {% for block in section.blocks %}
+        <div class="testimonial-slide" {{ block.shopify_attributes }}>
+
+          <!-- Row 1: Review Icon -->
+          {% if block.settings.review_icon != blank %}
+            <img
+              class="testimonial-review-icon"
+              src="{{ block.settings.review_icon | image_url: width: 60 }}"
+              alt="Review icon">
+          {% endif %}
+
+          <!-- Row 2: Feedback -->
+          {% if block.settings.feedback != blank %}
+            <p class="testimonial-feedback">“{{ block.settings.feedback }}”</p>
+          {% endif %}
+
+          <!-- Row 3: Avatar + Name + Saying Icon -->
+          <div class="testimonial-footer">
+            {% if block.settings.avatar != blank %}
+              <img
+                class="testimonial-avatar"
+                src="{{ block.settings.avatar | image_url: width: 60 }}"
+                alt="{{ block.settings.name | escape }}">
+            {% endif %}
+            <div class="testimonial-info">
+              {% if block.settings.name != blank %}
+                <p class="testimonial-name">{{ block.settings.name }}</p>
+              {% endif %}
+            </div>
+            {% if block.settings.saying_icon != blank %}
+              <img
+                class="testimonial-saying-icon"
+                src="{{ block.settings.saying_icon | image_url: width: 30 }}"
+                alt="Saying icon">
+            {% endif %}
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+    <div
+      class="testimonial-controls"
+      aria-hidden="false"
+      style="display:flex;gap: 1.5rem;justify-content:center;">
+      <button
+        class="slider-prev"
+        type="button"
+        aria-label="Previous slide">‹</button>
+      <button
+        class="slider-next"
+        type="button"
+        aria-label="Next slide">›</button>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.querySelector('.testimonial-slider');
+  if (!slider) return;
+  
+  // 1) Convert vertical wheel to horizontal scroll for convenience on desktop
+  // slider.addEventListener('wheel', function(e) {
+  //   // If user scrolls vertically, move slider horizontally
+  //   if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+  //     e.preventDefault();
+  //     slider.scrollLeft += e.deltaY;
+  //   }
+  // }, { passive: false });
+  
+  // 2) Arrow buttons (if present)
+  const nextBtn = document.querySelector('.slider-next');
+  const prevBtn = document.querySelector('.slider-prev');
+  const scrollAmount = Math.round(slider.clientWidth * 0.8); // scroll by viewport chunk
+  
+  if (nextBtn) nextBtn.addEventListener('click', () => slider.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+  if (prevBtn) prevBtn.addEventListener('click', () => slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+  
+  // 3) Optional: simple autoplay (uncomment to enable)
+  // let autoplayInterval = 4000;
+  // let autoplay = setInterval(() => { slider.scrollBy({ left: scrollAmount, behavior: 'smooth' }); }, autoplayInterval);
+  // slider.addEventListener('mouseenter', () => clearInterval(autoplay));
+  // slider.addEventListener('mouseleave', () => { autoplay = setInterval(() => { slider.scrollBy({ left: scrollAmount, behavior: 'smooth' }); }, autoplayInterval); });
+  
+  // 4) Accessibility: focus first/last slide via keyboard arrows
+  // slider.addEventListener('keydown', (e) => {
+  //   if (e.key === 'ArrowRight') slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  //   if (e.key === 'ArrowLeft') slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  // });
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Testimonial Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Testimonials"
+      }, {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "What Our Customers Say"
+      }, {
+        "type": "textarea",
+        "id": "explanation",
+        "label": "Explanation",
+        "default": "See why our customers trust us and love working with us."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "review_icon",
+            "label": "Review Icon"
+          },
+          {
+            "type": "textarea",
+            "id": "feedback",
+            "label": "Feedback",
+            "default": "This product exceeded my expectations!"
+          },
+          {
+            "type": "image_picker",
+            "id": "avatar",
+            "label": "Avatar"
+          },
+          {
+            "type": "text",
+            "id": "name",
+            "label": "Name",
+            "default": "John Doe"
+          }, {
+            "type": "image_picker",
+            "id": "saying_icon",
+            "label": "Saying Icon"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 10,
+    "presets": [
+      {
+        "name": "Testimonial Section",
+        "category": "Custom Sections",
+        "blocks": [
+          {
+            "type": "testimonial"
+          }, {
+            "type": "testimonial"
+          }, {
+            "type": "testimonial"
+          }, {
+            "type": "testimonial"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

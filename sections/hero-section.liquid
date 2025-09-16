@@ -1,0 +1,150 @@
+<style>
+  .hero-section {
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10rem 10rem 8rem;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: auto;
+    max-width: 1400px;
+  }
+
+  .hero-section::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 50%, transparent 100%);
+
+  }
+
+  .hero-section .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+    /* margin-left: 10rem; */
+    /* margin-bottom: 6rem; */
+  }
+
+  .hero-section .hero_subheading {
+    font-size: 1.35rem;
+    font-weight: bold;
+    /* margin-bottom: .5rem; */
+    background: white;
+    color: #0193f5;
+    width: max-content;
+    padding: 4px 12px;
+    border-radius: 50px;
+    border: 1px solid;
+  }
+
+  .hero-section .hero_heading {
+    font-size: 4.5rem;
+    font-weight: 700;
+    /* margin-bottom: 1rem; */
+  }
+
+  .hero-section .hero_description {
+    font-size: 1.7rem;
+    line-height: 1.5;
+    margin-top: 0;
+  }
+
+  .hero-section .hero-cta {
+    position: relative;
+    z-index: 2;
+    align-self: flex-end;
+    /* margin-bottom: 4rem; */
+    /* margin-right: 10rem; */
+  }
+
+</style>
+
+<section class="hero-section" style="background-image: url({{ section.settings.background_image | image_url: width: 1600 }});">
+  <div class="hero-content">
+    {% if section.settings.subheading != blank %}
+      <div class="hero_subheading">{{ section.settings.subheading }}</div>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <div class="hero_heading">{{ section.settings.heading }}</div>
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <div class="hero_description">&nbsp;{{ section.settings.description }}</div>
+    {% endif %}
+  </div>
+
+  <div class="hero-cta">
+    {% if section.settings.button_text != blank %}
+
+      <a class="custom-btn btn-4" href="{{ section.settings.button_link | default: '#' }}">
+        <span>
+          {{ section.settings.button_text }}
+          &nbsp;
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+          </svg>
+        </span>
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Your Subheading"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Your Heading Here"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "This is your hero section description. You can update it from the theme editor."
+      },
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Get Started"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Section",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}

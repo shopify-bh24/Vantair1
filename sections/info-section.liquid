@@ -1,0 +1,259 @@
+<style>
+  .info-section {
+    padding: 3rem 4rem 5rem;
+    /* background: #f9f9f9; */
+    font-family: Arial
+    , sans-serif;
+    margin: auto;
+  }
+
+  .info-container{
+    max-width: 1440px;
+    margin: auto;
+  }
+
+  .info-section .section-title {
+    font-size: 5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: #236878;
+    margin-top: 0;
+  }
+
+  .info-section .section_subtitle {
+    color: white;
+    border-radius: 50px;
+    width: max-content;
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+    background: #236878;
+  }
+
+  .info-section .content-row {
+    flex-wrap: wrap;
+    gap: 4rem;
+    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* left : right = 1:1 */
+  }
+
+  .info-section .content-image img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .info-section .content-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .info-section .section-description {
+    font-size: 1.5rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .info-section .blocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 1rem;
+    margin: 2.5rem 0;
+  }
+
+  .info-section .text-block {
+    color: #015068;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    background: white;
+    border: 1px solid #dbdbdb;
+  }
+
+  .info-section .text-block:hover{
+    background: #015068;
+    color: white;
+    transition: 0.3s;
+  }
+
+  .info-section .block-heading {
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+    /* color: white; */
+  }
+
+  .info-section .block-subtext {
+    font-size: 1.2rem;
+    /* color: white; */
+    margin: 0;
+  }
+
+  .info-section .cta-row {
+    margin-top: 1rem;
+  }
+
+  .cta-row a {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    width: max-content;
+    padding: 2rem;
+  }
+
+  .arrow_wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 50px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrow_wrapper svg {
+    transform: rotate(-45deg);
+    color: #015068;
+
+  }
+</style>
+
+
+<section class="info-section">
+  <div class="info-container">
+    {% if section.settings.subtitle != blank %}
+      <h3 class="section_subtitle">{{ section.settings.subtitle }}</h3>
+    {% endif %}
+    {% if section.settings.title != blank %}
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    <div class="content-row">
+      <!-- Left Image -->
+      <div class="content-image">
+        {% if section.settings.image != blank %}
+          <img src="{{ section.settings.image | image_url: width: 800 }}" alt="{{ section.settings.title | escape }}">
+        {% endif %}
+      </div>
+
+      <!-- Right Content -->
+      <div class="content-text">
+        {% if section.settings.description != blank %}
+          <p class="section-description">{{ section.settings.description }}</p>
+        {% endif %}
+
+        <div class="blocks-grid">
+          {% for block in section.blocks %}
+            <div class="text-block" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                <p class="block-heading">{{ block.settings.heading }}</p>
+              {% endif %}
+              {% if block.settings.subtext != blank %}
+                <p class="block-subtext">{{ block.settings.subtext }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if section.settings.button_text != blank %}
+          <div class="cta-row">
+            <a href="{{ section.settings.button_link }}" class="custom-btn btn-5">
+              <span>
+                {{ section.settings.button_text }}&nbsp;&nbsp;
+                <div class="arrow_wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+                  </svg>
+                </div>
+              </span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Info Section",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title",
+        "default": "Our Mission"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Section Subtitle"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Left Image"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "description",
+        "label": "Description",
+        "default": "This is a short description text about your brand or offering. You can explain your values or highlight important information here."
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Learn More"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Text Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Block Heading",
+            "default": "Block Title"
+          }, {
+            "type": "textarea",
+            "id": "subtext",
+            "label": "Block Subtext",
+            "default": "Block description text here."
+          }
+        ]
+      }
+    ],
+    "max_blocks": 6,
+    "presets": [
+      {
+        "name": "Info Section",
+        "category": "Custom Sections",
+        "blocks": [
+          {
+            "type": "text_block"
+          }, {
+            "type": "text_block"
+          }, {
+            "type": "text_block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

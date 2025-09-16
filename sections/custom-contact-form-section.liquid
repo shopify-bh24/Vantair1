@@ -1,0 +1,280 @@
+<style>
+  .custom-contact {
+    width: 100%;
+  }
+  .custom-contact-container {
+    max-width: 1440px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin: auto;
+  }
+  .custom-contact-left img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .contact-title {
+    margin: 0 0 1rem;
+    font-weight: 700;
+  }
+  .contact-description {
+    margin-bottom: 2rem;
+    color: #555;
+  }
+  .field {
+    margin-bottom: 1.2rem;
+  }
+
+  .custom_field__input {
+    border-radius: 12px;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    width: 100%;
+    border: 1px solid #23687851;
+    resize: vertical;
+    /* max-width: 400px; */
+  }
+
+  .custom_field__input:focus-visible {
+    outline: none;
+    outline-offset: none;
+    box-shadow: none;
+  }
+
+  .company-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  .company-info strong {
+    color: #111;
+  }
+
+  .custom_contact_btn {
+    border: none;
+    width: 100%;
+    height: 48px;
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 768px) {
+    .custom-contact-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<!-- sections/custom-contact-form.liquid -->
+<div class="info-section custom-contact color-{{ section.settings.color_scheme }} gradient">
+  <div class="custom-contact-container section-{{ section.id }}-padding">
+    <!-- Left Image -->
+    <div class="custom-contact-left">
+      {% if section.settings.image != blank %}
+        <img
+          src="{{ section.settings.image | image_url: width: 800 }}"
+          alt="Contact"
+          class="contact-image">
+      {% endif %}
+    </div>
+
+    <!-- Right Content -->
+    <div class="custom-contact-right">
+      <!-- Subtitle -->
+      {% if section.settings.subtitle != blank %}
+        <h3 class="section_subtitle">{{ section.settings.subtitle }}</h3>
+      {% endif %}
+
+      <!-- Title -->
+      {% if section.settings.title != blank %}
+        <h2 class="section-title {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      <!-- Description -->
+      {% if section.settings.description != blank %}
+        <p class="contact-description">{{ section.settings.description }}</p>
+      {% endif %}
+
+      {%- form 'contact'
+        , id: 'CustomContactForm'
+        , class: 'custom-contact-form' -%}
+        {% if form.posted_successfully? %}
+          <p class="form-status success">{{ 'templates.contact.form.post_success' | t }}</p>
+        {% elsif form.errors %}
+          <p class="form-status error">{{ 'templates.contact.form.error_heading' | t }}</p>
+        {% endif %}
+
+        <!-- Name -->
+        <div class="custom_field">
+          <input
+            type="text"
+            id="ContactForm-name"
+            name="contact[{{ 'templates.contact.form.name' | t }}]"
+            placeholder="{{ 'templates.contact.form.name' | t }}"
+            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+            class="custom_field__input">
+        </div>
+
+        <!-- Email -->
+        <div class="custom_field">
+          <input
+            type="email"
+            id="ContactForm-email"
+            name="contact[email]"
+            placeholder="{{ 'templates.contact.form.email' | t }} *"
+            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+            required
+            class="custom_field__input">
+        </div>
+
+        <!-- Phone -->
+        <div class="custom_field">
+          <input
+            type="tel"
+            id="ContactForm-phone"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            class="custom_field__input">
+        </div>
+
+        <!-- Comment -->
+        <div class="custom_field">
+          <textarea
+            id="ContactForm-body"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ 'templates.contact.form.comment' | t }}"
+            rows="6"
+            class="custom_field__input">{{ form.body }}</textarea>
+        </div>
+
+        <!-- Company Info -->
+        <div class="company-info">
+          <div>
+            <strong>{{ section.settings.company_phone_label }}</strong><br>
+            <span>{{ section.settings.company_phone }}</span>
+          </div>
+          <div>
+            <strong>{{ section.settings.company_email_label }}</strong><br>
+            <span>{{ section.settings.company_email }}</span>
+          </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="custom-contact__button_container">
+          <button type="submit" class="custom-btn btn-5 custom_contact_btn">{{ section.settings.button_label }}</button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("CustomContactForm");
+  const statusEl = document.createElement("p");
+  statusEl.classList.add("form-status");
+  form.appendChild(statusEl);
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault(); // stop redirect
+
+    statusEl.textContent = "Sending...";
+    statusEl.classList.remove("success", "error");
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+      });
+
+      if (response.ok) {
+        statusEl.textContent = "Thank you! Your message has been sent.";
+        statusEl.classList.add("success");
+        form.reset();
+      } else {
+        statusEl.textContent = "Something went wrong. Please try again.";
+        statusEl.classList.add("error");
+      }
+    } catch (err) {
+      statusEl.textContent = "Network error. Please try later.";
+      statusEl.classList.add("error");
+    }
+  });
+});
+</script>
+
+
+
+{% schema %}
+  {
+    "name": "Custom Contact Form",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Left Side Image"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Get in Touch"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Contact Us"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "We’d love to hear from you! Fill out the form and we’ll get back to you soon."
+      }, {
+        "type": "text",
+        "id": "company_phone_label",
+        "label": "Company Phone Label",
+        "default": "Call Us"
+      }, {
+        "type": "text",
+        "id": "company_phone",
+        "label": "Company Phone",
+        "default": "+1 (555) 123-4567"
+      }, {
+        "type": "text",
+        "id": "company_email_label",
+        "label": "Company Email Label",
+        "default": "Email Us"
+      }, {
+        "type": "text",
+        "id": "company_email",
+        "label": "Company Email",
+        "default": "support@example.com"
+      }, {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button Label",
+        "default": "Send Message"
+      }, {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "Color Scheme",
+        "default": "scheme-1"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Contact Form",
+        "category": "Contact"
+      }
+    ]
+  }
+{% endschema %}

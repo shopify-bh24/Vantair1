@@ -40,7 +40,7 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover" data-type="{{ card_product.metafields.custom.type | escape }}">
+  <div class="card-wrapper product-card-wrapper underline-links-hover" data-type="{{ card_product.metafields.custom.type | escape }}" data-typology="{{ card_product.metafields.custom.typology | default: '' | escape }}" data-region="{{ card_product.metafields.custom.region | default: '' | escape }}">
     <div
       class="
         card card--{{ settings.card_style }}
@@ -55,7 +55,7 @@
     >
       <div
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
-        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+        style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%; height: 180px"
       >
         {%- if card_product.featured_media -%}
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
@@ -576,7 +576,7 @@
       assign ratio = 0.8
     endif
   -%}
-  <div class="card-wrapper product-card-wrapper underline-links-hover" data-type="{{ card_product.metafields.custom.type | escape }}">
+  <div class="card-wrapper product-card-wrapper underline-links-hover" data-type="{{ card_product.metafields.custom.type | escape }}" data-typology="{{ product.metafields.custom.typology | default: '' | escape }}" data-region="{{ product.metafields.custom.region | default: '' | escape }}">
     <div
       class="
         card card--{{ settings.card_style }}

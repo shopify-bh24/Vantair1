@@ -5,14 +5,16 @@
     justify-content: center;
     gap: 1rem;
     align-items: center;
-    background: #f3f3f3;
-    border-radius: 8px;
+    background: #015068;
+    border-radius: 50px;
     flex-wrap: wrap;
+    width: max-content;
+    border: 1px solid;
   }
 
   .filter-input {
     padding: 11px 14px;
-    border-radius: 8px;
+    border-radius: 50px;
     border: 1px solid #888888;
   }
 
@@ -39,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 16px;
+    /* padding: 0 16px; */
     font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -55,8 +57,8 @@
     left: 4px;
     width: calc(50% - 4px);
     height: 36px;
-    background: #101010;
-    border-radius: 30px;
+    background: #015068;
+    border-radius: 50px;
     transition: transform 0.3s cubic-bezier(.4,0,.2,1);
     z-index: 1;
   }
@@ -68,15 +70,15 @@
     transition: color 0.25s ease;
   }
 
-  .switch-text.buy { color: #fff; }
-  .switch-text.rent { color: #555; }
+  .switch-text.buy { color: white; }
+  .switch-text.rent { color: #015068; }
 
   .switch-input:checked + .switch-label::before {
     transform: translateX(100%);
   }
 
-  .switch-input:checked + .switch-label .buy { color: #555; }
-  .switch-input:checked + .switch-label .rent { color: #fff; }
+  .switch-input:checked + .switch-label .buy { color: #015068; }
+  .switch-input:checked + .switch-label .rent { color: white; }
 
   /* Custom dropdowns */
   .custom-filters { display: flex; gap: 1rem; flex-wrap: wrap; }
@@ -92,8 +94,9 @@
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #888;
-    border-radius: 8px;
+    border-radius: 50px;
     background: #fff;
+    color: #015068;
     cursor: pointer;
     text-align: left;
     display: flex;
@@ -114,14 +117,16 @@
     overflow: hidden;
     position: absolute;
     width: 100%;
+    color: black;
     background: #fff;
     border: 1px solid #888;
-    border-radius: 8px;
+    border-radius: 12px;
     left: 0;
     z-index: 999;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     transition: max-height 0.3s ease, opacity 0.3s ease;
     opacity: 0;
+    margin-top: 0.4rem;
   }
 
   .dropdown-menu.open-down {
@@ -142,14 +147,15 @@
     padding: 10px 15px;
     cursor: pointer;
     transition: background 0.2s;
+    
   }
 
-  .dropdown-menu li:hover { background: #f0f0f0; }
+  .dropdown-menu li:hover {
+    background: #f0f0f0;
+    border-radius: 12px;
+  }
 </style>
 
-<div id="search_header" style="color: white; font-size: {{section.settings.search_header_font_size}}px; margin-bottom: {{ section.settings.search_header_margin_bottom }}px">
-  {{ section.settings.search_header }}
-</div>
 
 <div class="product-filters page-width">
   <div class="switch-container">
@@ -199,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function getDropdownValue(dropdown) {
     const btn = dropdown.querySelector('.dropdown-btn');
-    return btn.getAttribute('data-value') || '';
+    return btn?.getAttribute('data-value')?.toLowerCase() || '';
   }
 
   function getProductCards() {
@@ -207,54 +213,55 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function filterProducts() {
-    const typeValue = getCurrentType().toLowerCase();
-    const typologyValue = getDropdownValue(typologyDropdown).toLowerCase();
-    const regionValue = getDropdownValue(regionDropdown).toLowerCase();
-    const keywordValue = (keywordSearch.value || "").toLowerCase();
+  const typeValue = getCurrentType();
+  const typologyValue = getDropdownValue(typologyDropdown);
+  const regionValue = getDropdownValue(regionDropdown);
+  const keywordValue = (keywordSearch.value || "").toLowerCase();
 
-    let visibleCount = 0;
+  let visibleCount = 0;
 
-    getProductCards().forEach(card => {
-      const titleText = (card.querySelector(".card__heading a, .card__heading")?.textContent || "").toLowerCase();
-      const typeAttr = (card.dataset.type || "").toLowerCase();
-      const typologyAttr = (card.dataset.typology || "").toLowerCase();
-      const regionAttr = (card.dataset.region || "").toLowerCase();
+  getProductCards().forEach(card => {
+    const titleText = (card.querySelector(".card__heading a, .card__heading")?.textContent || "").toLowerCase();
+    const typeAttr = (card.dataset.type || "").toLowerCase();
+    const typologyAttr = (card.dataset.typology || "").toLowerCase();
+    const regionAttr = (card.dataset.region || "").toLowerCase();
 
-      const show = (!typeValue || typeAttr.includes(typeValue)) &&
-                   (!typologyValue || typologyAttr.includes(typologyValue)) &&
-                   (!regionValue || regionAttr.includes(regionValue)) &&
-                   (!keywordValue || titleText.includes(keywordValue));
+    const matchesType = typeAttr.includes(typeValue); // FIXED
+    const matchesTypology = !typologyValue || typologyAttr === typologyValue;
+    const matchesRegion = !regionValue || regionAttr === regionValue;
+    const matchesKeyword = !keywordValue || titleText.includes(keywordValue);
 
-      const parentLi = card.closest("li") || card;
-      if (show) {
-        parentLi.style.display = "";
-        visibleCount++;
-      } else {
-        parentLi.style.display = "none";
-      }
-    });
+    const show = matchesType && matchesTypology && matchesRegion && matchesKeyword;
 
-    if (noproductMsg) {
-      noproductMsg.style.display = visibleCount === 0 ? "block" : "none";
-    }
+    const parentLi = card.closest("li") || card;
+    parentLi.style.display = show ? "" : "none";
+
+    if (show) visibleCount++;
+  });
+
+  if (noproductMsg) {
+    noproductMsg.style.display = visibleCount === 0 ? "block" : "none";
   }
+}
 
-  // Switch filter
+
+  // Switch + keyword
   switchEl.addEventListener("change", filterProducts);
   keywordSearch.addEventListener("input", filterProducts);
 
-  // Dropdown logic
+  // Dropdowns
   document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
     const btn = dropdown.querySelector('.dropdown-btn');
     const menu = dropdown.querySelector('.dropdown-menu');
 
     btn.addEventListener('click', e => {
       e.stopPropagation();
+
       // close others
       document.querySelectorAll('.custom-dropdown').forEach(d => {
         if (d !== dropdown) {
           d.classList.remove('open');
-          d.querySelector('.dropdown-menu').classList.remove('open-up','open-down');
+          d.querySelector('.dropdown-menu')?.classList.remove('open-up','open-down');
         }
       });
 
@@ -265,7 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const spaceAbove = rect.top;
         const spaceBelow = window.innerHeight - rect.bottom;
 
-        if (spaceBelow < 200 && spaceAbove > spaceBelow) {
+        if (spaceBelow < 400 && spaceAbove > spaceBelow) {
           menu.classList.add("open-up");
           menu.classList.remove("open-down");
         } else {
@@ -289,12 +296,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Close dropdowns if click outside
+  // Click outside closes dropdowns
   document.addEventListener('click', e => {
     document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
       if (!dropdown.contains(e.target)) {
         dropdown.classList.remove('open');
-        dropdown.querySelector('.dropdown-menu').classList.remove('open-up','open-down');
+        dropdown.querySelector('.dropdown-menu')?.classList.remove('open-up','open-down');
       }
     });
   });

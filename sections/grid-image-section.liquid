@@ -1,0 +1,277 @@
+<style>
+  .grid-blocks-section{
+    padding: 8rem 4rem;
+  }
+
+  .grid-blocks__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1440px;
+    margin: auto;
+  }
+
+  .grid-blocks__row {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .grid-blocks__row:first-child {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .grid-blocks__row:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-blocks__item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    color: #fff;
+    height: 100%;
+  }
+
+  .grid-blocks__button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(2, 126, 251, 1);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    transition: background 0.3s ease;
+  }
+
+  .grid-blocks__button:hover {
+    background: rgba(0, 80, 200, 1);
+  }
+
+  .grid-blocks__text {
+    position: absolute;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    /* margin-left: 2rem; */
+    /* margin-bottom: 2rem; */
+  }
+
+  .grid-blocks__title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 2rem 2rem;
+  }
+
+  .grid-blocks__subtitle {
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.85;
+  }
+
+  .grid-blocks__col2 {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>
+
+<section class="grid-blocks-section">
+  <div class="grid-blocks__container">
+
+    <!-- Column 1 -->
+    <div class="grid-blocks__col1">
+      {% if section.blocks.size > 0 %}
+        {% assign block = section.blocks[0] %}
+        <div
+          class="grid-blocks__item"
+          style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%), url({{ block.settings.image | image_url: width: 900 }});"
+          {{ block.shopify_attributes }}>
+          {% if block.settings.button_text != blank %}
+            <div class="cta-row" style="display: flex; justify-content: end;">
+              <a
+                href="{{ section.settings.button_link }}"
+                class="custom-btn btn-5"
+                style="background: none; box-shadow: none; padding: 0">
+                <span>
+                  {{ section.settings.button_text }}
+                  <div class="arrow_wrapper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+                    </svg>
+                  </div>
+                </span>
+              </a>
+            </div>
+          {% endif %}
+          <div class="grid-blocks__text">
+            {% if block.settings.title != blank %}
+              <h3 class="grid-blocks__title">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <p class="grid-blocks__subtitle">{{ block.settings.subtitle }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Column 2 -->
+    <div class="grid-blocks__col2">
+      <div class="grid-blocks__row">
+        {% for block in section.blocks offset: 1 limit: 2 %}
+          <div
+            class="grid-blocks__item"
+            style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%), url({{ block.settings.image | image_url: width: 900 }});"
+            {{ block.shopify_attributes }}>
+            {% if block.settings.button_text != blank %}
+              <div class="cta-row" style="display: flex; justify-content: end;">
+                <a
+                  href="{{ section.settings.button_link }}"
+                  class="custom-btn btn-5"
+                  style="background: none; box-shadow: none; padding: 0">
+                  <span>
+                    {{ section.settings.button_text }}
+                    <div class="arrow_wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+                      </svg>
+                    </div>
+                  </span>
+                </a>
+              </div>
+            {% endif %}
+            <div class="grid-blocks__text">
+              {% if block.settings.title != blank %}
+                <h3 class="grid-blocks__title">{{ block.settings.title }}</h3>
+              {% endif %}
+              {% if block.settings.subtitle != blank %}
+                <p class="grid-blocks__subtitle">{{ block.settings.subtitle }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="grid-blocks__row">
+        {% assign block = section.blocks[3] %}
+        {% if block %}
+          <div
+            class="grid-blocks__item"
+            style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%), 
+                  url({{ block.settings.image | image_url: width: 900 }});"
+            {{ block.shopify_attributes }}>
+            {% if block.settings.button_text != blank %}
+              <div class="cta-row" style="display: flex; justify-content: end;">
+                <a
+                  href="{{ section.settings.button_link }}"
+                  class="custom-btn btn-5"
+                  style="background: none; box-shadow: none; padding: 0">
+                  <span>
+                    {{ section.settings.button_text }}
+                    <div class="arrow_wrapper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+                      </svg>
+                    </div>
+                  </span>
+                </a>
+              </div>
+            {% endif %}
+            <div class="grid-blocks__text">
+              {% if block.settings.title != blank %}
+                <h3 class="grid-blocks__title">{{ block.settings.title }}</h3>
+              {% endif %}
+              {% if block.settings.subtitle != blank %}
+                <p class="grid-blocks__subtitle">{{ block.settings.subtitle }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Grid Image Section",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Block Title"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Explore"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 4,
+    "presets": [
+      {
+        "name": "Grid Image Section",
+        "blocks": [
+          {
+            "type": "block"
+          }, {
+            "type": "block"
+          }, {
+            "type": "block"
+          }, {
+            "type": "block"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

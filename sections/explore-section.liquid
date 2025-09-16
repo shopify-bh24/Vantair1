@@ -1,0 +1,169 @@
+<style>
+  .explore-section {
+    padding: 8rem 4rem;
+    background: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+
+  .explore-section__container {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .explore-section__subtitle {
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #027efb;
+    margin: 0 0 2rem;
+  }
+
+  .explore-section__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .explore-section__col1 {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .explore-section__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0 0 1.5rem;
+  }
+
+  .explore-section__button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, rgba(2,126,251,1), rgba(0,80,200,1));
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .explore-section__button:hover {
+    background: linear-gradient(135deg, rgba(0,80,200,1), rgba(2,126,251,1));
+  }
+
+  .explore-section__col2 {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+  }
+
+  .explore-section__image {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .explore-section .cta-row{
+    margin-top: 4rem;
+  }
+</style>
+
+<section class="explore-section info-section">
+  <div class="explore-section__container">
+
+    <!-- Row 1: Subtitle -->
+    {% if section.settings.subtitle != blank %}
+      <h3 class="section_subtitle">{{ section.settings.subtitle }}</h3>
+    {% endif %}
+
+    <!-- Row 2: Content -->
+    <div class="explore-section__row">
+      <!-- Column 1: Title + CTA -->
+      <div class="explore-section__col1">
+        {% if section.settings.title != blank %}
+          <h2 class="section-title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <p class="explores-ection__description">{{ section.settings.description }}</p>
+        {% endif %}
+        {% if section.settings.button_text != blank %}
+          <div class="cta-row">
+            <a href="{{ section.settings.button_link }}" class="custom-btn btn-5">
+              <span>
+                {{ section.settings.button_text }}&nbsp;&nbsp;
+                <div class="arrow_wrapper">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.75.75 0 0 1 .75-.75h11.19L9.22 3.28a.75.75 0 1 1 1.06-1.06l5.25 5.25a.75.75 0 0 1 0 1.06l-5.25 5.25a.75.75 0 0 1-1.06-1.06l3.72-3.72H1.75A.75.75 0 0 1 1 8z" />
+                  </svg>
+                </div>
+              </span>
+            </a>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Column 2: Image -->
+      <div class="explore-section__col2">
+        {% if section.settings.image != blank %}
+          <img
+            src="{{ section.settings.image | image_url: width: 800 }}"
+            alt="{{ section.settings.title | escape }}"
+            class="explore-section__image">
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Explore Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Discover More"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Explore the Possibilities"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Right Image"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "description",
+        "label": "Description"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Get Started"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Explore Section",
+        "category": "Custom Sections"
+      }
+    ]
+  }
+{% endschema %}
