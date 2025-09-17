@@ -11,7 +11,6 @@
     height: 80px;
   }
 
-  /* Header container */
   .header-container {
     max-width: 1440px;
     margin: 0 auto;
@@ -21,7 +20,6 @@
     align-items: center;
   }
 
-  /* Logo */
   .header-logo img {
     max-height: 60px;
   }
@@ -32,7 +30,7 @@
     color: #027efb;
   }
 
-  /* Menu wrapper */
+  /* Desktop menu */
   .header-menu {
     display: flex;
     gap: 1rem;
@@ -40,7 +38,6 @@
     justify-content: center;
   }
 
-  /* Menu links */
   .header-menu a {
     font-size: 1.5rem;
     color: white;
@@ -50,37 +47,71 @@
     padding: 1rem 1.8rem;
   }
 
-  /* Hover effect */
   .header-menu a:hover {
     background: rgba(255, 255, 255, 0.2);
   }
 
-  /* Active link (current page) */
   .header-menu a.active {
     background: rgba(255, 255, 255, 0.2);
   }
 
-  /* Add body padding so content is not hidden under header */
   body {
     padding-top: 80px;
   }
 
+  /* Hamburger (hidden by default) */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 450px) {
     .header-container {
-      flex-direction: column;
-      align-items: flex-start;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      display: flex;
     }
 
     .header-menu {
-      margin-top: 1rem;
-      flex-direction: column;
+      position: absolute;
+      top: 80px;
+      left: 0;
       width: 100%;
+      background: #015068;
+      flex-direction: column;
+      display: none;
+      padding: 1rem 0;
+    }
+
+    .header-menu.open {
+      display: flex;
     }
 
     .header-menu a {
       margin: 0.5rem 0;
+      padding: 1rem;
+      text-align: center;
     }
+
+  .header-menu a.active {
+    width: 100%;
+  }
   }
 </style>
 
@@ -95,8 +126,15 @@
       {% endif %}
     </div>
 
+    <!-- Hamburger toggle (mobile only) -->
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <!-- Navigation Menu -->
-    <nav class="header-menu">
+    <nav class="header-menu" id="headerMenu">
       {% for link in linklists.main-menu.links %}
         <a href="{{ link.url }}" class="{% if link.active %}active{% endif %}">
           {{ link.title }}
@@ -106,27 +144,37 @@
   </div>
 </header>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menuToggle");
+    const headerMenu = document.getElementById("headerMenu");
+
+    menuToggle.addEventListener("click", function () {
+      headerMenu.classList.toggle("open");
+    });
+  });
+</script>
+
 {% schema %}
-{
-  "name": "Custom Header",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "Logo"
-    },
-    {
-      "type": "text",
-      "id": "logo_text",
-      "label": "Logo Text",
-      "default": "My Store"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Custom Header",
-      "category": "Header"
-    }
-  ]
-}
+  {
+    "name": "Custom Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      }, {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Logo Text",
+        "default": "My Store"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Header",
+        "category": "Header"
+      }
+    ]
+  }
 {% endschema %}

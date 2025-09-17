@@ -82,6 +82,20 @@
     flex-direction: column;
     gap: 2rem;
   }
+
+  @media screen and (max-width: 450px) {
+    .grid-blocks-section{
+      gap: 4rem 2rem;
+    }
+    
+    .grid-blocks__container{
+      grid-template-columns: auto;
+    }
+
+    .grid-blocks__row:first-child{
+      grid-template-columns: auto;
+    }
+  }
 </style>
 
 <section class="grid-blocks-section">
