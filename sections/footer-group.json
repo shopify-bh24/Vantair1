@@ -14,25 +14,19 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "image_wxjAXz": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Vantair_Reblack_on_whitel_Estate_logo_1.png",
+            "image_width": 200,
+            "alignment": ""
+          }
+        },
         "link_list_EBXbHK": {
           "type": "link_list",
           "settings": {
-            "heading": "Properties by Type",
-            "menu": "properties-by-type"
-          }
-        },
-        "link_list_qzUE6T": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Properties by Region",
-            "menu": "properties-by-region"
-          }
-        },
-        "link_list_mCyBKj": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Properties by Typology",
-            "menu": "properties-by-typology"
+            "heading": "Properties",
+            "menu": "main-menu"
           }
         },
         "link_list_PqN9pN": {
@@ -41,16 +35,23 @@
             "heading": "Vantair",
             "menu": "other"
           }
+        },
+        "link_list_dCRqqD": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick links",
+            "menu": "footer"
+          }
         }
       },
       "block_order": [
+        "image_wxjAXz",
         "link_list_EBXbHK",
-        "link_list_qzUE6T",
-        "link_list_mCyBKj",
-        "link_list_PqN9pN"
+        "link_list_PqN9pN",
+        "link_list_dCRqqD"
       ],
       "settings": {
-        "color_scheme": "scheme-1",
+        "color_scheme": "scheme-4",
         "newsletter_enable": false,
         "newsletter_heading": "",
         "enable_follow_on_shop": false,

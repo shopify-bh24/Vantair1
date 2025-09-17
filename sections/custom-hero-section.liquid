@@ -12,6 +12,9 @@
     /* margin: auto; */
     /* ensures hero has height */
     max-width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 
@@ -46,15 +49,16 @@
 
 
   .hero-content {
-    position: absolute;
+    /* position: absolute; */
     z-index: 2;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 0 6rem 5rem;
+    /* padding: 0 0 6rem 5rem; */
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
     bottom: 0;
+    align-items: center;
   }
 
   .hero-subtitle {
@@ -74,13 +78,22 @@
     margin: 0;
   }
 
-  .hero_snippet{
-    position: absolute;
-    bottom: -40px;
+  .hero_snippet {
+    /* position: absolute; */
+    /* bottom: 40%; */
     /* display: flex; */
     /* justify-content: center; */
-    width: calc(100% - 7rem);
+    width: 100%;
     z-index: 3;
+  }
+
+  .hero_snippet_search_button {
+    font-size: 2rem;
+    /* height: 50px; */
+    display: flex;
+    align-items: center;
+    padding: 2.3rem 3rem;
+    border: 1px solid;
   }
 
 </style>
@@ -95,14 +108,25 @@
       <div class="hero-title">{{ section.settings.title }}</div>
     {% endif %}
 
-    </div>
-    
-    <div class="hero-image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}');">.</div>
-
     <div class="hero_snippet">
       {% render 'filter-search' %}
     </div>
+
+    <div class="hero_snippet_search_button custom-btn btn-5" id="customSearchBtn">Search</div>
+  </div>
+
+  <div class="hero-image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}');">.</div>
+
 </section>
+
+<script>
+  document.getElementById("customSearchBtn").addEventListener("click", function () {
+    document.querySelector(".customTargetCollection").scrollIntoView({
+      behavior: "smooth", // smooth scrolling
+      block: "start"      // align at the top
+    });
+  });
+</script>
 
 
 {% schema %}
@@ -123,6 +147,29 @@
         "type": "image_picker",
         "id": "image",
         "label": "Background Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "typology_option",
+        "name": "Typology Option",
+        "settings": [{
+            "type": "text",
+            "id": "label",
+            "label": "Option Label",
+            "default": "Houses"
+          }
+        ]
+      }, {
+        "type": "region_option",
+        "name": "Region Option",
+        "settings": [{
+            "type": "text",
+            "id": "label",
+            "label": "Option Label",
+            "default": "Lisboa"
+          }
+        ]
       }
     ],
     "presets": [

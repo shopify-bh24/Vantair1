@@ -11,10 +11,56 @@
   "sections": {
     "custom_hero_section_YdFk34": {
       "type": "custom-hero-section",
+      "blocks": {
+        "typology_option_hQFyYX": {
+          "type": "typology_option",
+          "settings": {
+            "label": "Houses"
+          }
+        },
+        "typology_option_R48G9X": {
+          "type": "typology_option",
+          "settings": {
+            "label": "Commercials"
+          }
+        },
+        "typology_option_zkWBdT": {
+          "type": "typology_option",
+          "settings": {
+            "label": "Apartments"
+          }
+        },
+        "region_option_9wiKrJ": {
+          "type": "region_option",
+          "settings": {
+            "label": "Lisboa"
+          }
+        },
+        "region_option_D96BKg": {
+          "type": "region_option",
+          "settings": {
+            "label": "Porto"
+          }
+        },
+        "region_option_UNe3LA": {
+          "type": "region_option",
+          "settings": {
+            "label": "Algarve"
+          }
+        }
+      },
+      "block_order": [
+        "typology_option_hQFyYX",
+        "typology_option_R48G9X",
+        "typology_option_zkWBdT",
+        "region_option_9wiKrJ",
+        "region_option_D96BKg",
+        "region_option_UNe3LA"
+      ],
       "name": "Custom Hero Section",
       "settings": {
-        "subtitle": "WELCOME",
-        "title": "<p>Looking for a place to live your story?</p><p>We can help.</p>",
+        "subtitle": "",
+        "title": "<p>Find the home that fits your story.</p>",
         "image": "shopify://shop_images/img-1_1.png"
       }
     },
@@ -26,7 +72,7 @@
         "subtitle": "PROPERTIES",
         "title": "Explore Our Properties",
         "heading_size": "h1",
-        "description": "<p>Browse through our full collection of homes for sale, rentals, and development opportunities.</p>",
+        "description": "<p>Browse by location or lifestyle - sea - view apartments, family villas, new developments, and premium commercial spaces.</p>",
         "show_description": false,
         "description_style": "body",
         "columns_desktop": 4,
@@ -165,7 +211,7 @@
         "title": "Properties in Lisboa",
         "subtitle": "ABOUT",
         "image": "shopify://shop_images/sculpture_1_1.png",
-        "description": "Discover our curated selection of homes, apartments, and commercial spaces available in the heart of Lisboa. From modern city apartments to charming traditional houses, these properties combine convenience with the rich culture of Portugal’s capital. Whether you’re looking to buy your first home, rent a stylish flat, or invest in commercial real estate, Lisboa offers a wide variety of opportunities to match your lifestyle and needs.",
+        "description": "Lisbon blends Atlantic light, historic neighborhoods, and contemporary living. From riverfront apartments to hilltop views, VANTAIR curates homes that align with your lifestyle, investment goals, and daily rhythm in the city.",
         "button_text": "DISCOVER MORE IN LISBOA",
         "button_link": "shopify://collections/lisboa"
       }
@@ -178,23 +224,23 @@
           "settings": {
             "icon": "shopify://shop_images/bx_bx-check-shield.svg",
             "title": "Expert Guidance",
-            "description": "Our deep market knowledge ensures you make confident property decisions, whether buying, selling, or renting."
+            "description": "We decode the market, negotiate hard, and protect your upside."
           }
         },
         "info_block_tphwnV": {
           "type": "info_block",
           "settings": {
             "icon": "shopify://shop_images/bx_bx-check-shield.svg",
-            "title": "Personalized Service",
-            "description": "We focus on your unique needs and provide tailored solutions to match your lifestyle and budget"
+            "title": "Custom Journey",
+            "description": "Your goals drive the search—investment yield, lifestyle, or both."
           }
         },
         "info_block_F8dyPA": {
           "type": "info_block",
           "settings": {
             "icon": "shopify://shop_images/bx_bx-check-shield.svg",
-            "title": "Trusted & Transparent",
-            "description": "Clear communication, no hidden fees — just honesty and support at every step."
+            "title": "Trust & Clarity",
+            "description": "No surprises: true costs, timelines, and comparable data from day one."
           }
         }
       },
@@ -206,8 +252,8 @@
       "name": "Why Us Section",
       "settings": {
         "subtitle": "WHY US",
-        "title": "Our Core Strengths",
-        "explanation": "Our core strengths are built on expert market knowledge, personalized service tailored to every client, and a strong commitment to trust and transparency in every property transaction."
+        "title": "WHY VANTAIR",
+        "explanation": "Boutique guidance. Big-market expertise. Strong commitment to trust and transparency in every property transaction."
       }
     },
     "explore_section_eyJ9ge": {
@@ -217,7 +263,7 @@
         "subtitle": "EXPLORE",
         "title": "Discover Porto Homes",
         "image": "shopify://shop_images/Capturadeecra2025-09-11_as15.50.02.png",
-        "description": "Experience the charm of Porto with a wide range of properties available across the city. From riverside apartments with stunning views of the Douro to elegant houses in historic neighborhoods, Porto offers a perfect mix of tradition and modern living. Whether you’re investing, relocating, or renting, you’ll find a property that matches your lifestyle.",
+        "description": "Atlantic charm, contemporary design, and strong rental demand—curated by VANTAIR.",
         "button_text": "Explore Porto",
         "button_link": "shopify://collections/porto"
       }
@@ -358,8 +404,8 @@
       "settings": {
         "image": "shopify://shop_images/sculpture_1_1.png",
         "subtitle": "Get in Touch",
-        "title": "Contact Us",
-        "description": "We’d love to hear from you! Fill out the form and we’ll get back to you soon.",
+        "title": "Speak with a VANTAIR advisor",
+        "description": "Tell us what you’re looking for—location, budget, lifestyle or yield targets. We’ll craft a shortlist and next steps.",
         "company_phone_label": "Call Us",
         "company_phone": "+1 (555) 123-4567",
         "company_email_label": "Email Us",

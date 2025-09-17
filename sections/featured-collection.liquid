@@ -78,7 +78,7 @@
 
 
   <div
-    class="collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
+    class="customTargetCollection collection{% if section.settings.quick_add == 'bulk' %} collection-quick-add-bulk{% endif %} section-{{ section.id }}-padding{% if section.settings.full_width %} collection--full-width{% endif %}"
     id="collection-{{ section.id }}"
     data-id="{{ section.id }}"
   >
@@ -229,6 +229,8 @@
   <h2 id="no-products-message" style="display: none; text-align: center">No result</h2>
 
 </div>
+
+
 
 {% schema %}
 {

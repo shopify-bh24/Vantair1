@@ -167,26 +167,41 @@
   </div>
 
   <div class="custom-filters">
+    <!-- Typology Dropdown -->
     <div class="custom-dropdown" id="typology-dropdown">
-      <button class="dropdown-btn" data-value="">Select Typology <span class="arrow">&#9662;</span></button>
+      <button class="dropdown-btn" data-value="">
+        Select Typology <span class="arrow">&#9662;</span>
+      </button>
       <ul class="dropdown-menu">
         <li data-value="">All</li>
-        <li data-value="houses">Houses</li>
-        <li data-value="commercial">Commercial</li>
-        <li data-value="apartments">Apartments</li>
+        {% for block in section.blocks %}
+          {% if block.type == 'typology_option' %}
+            <li data-value="{{ block.settings.label | downcase }}">
+              {{ block.settings.label }}
+            </li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </div>
-
+  
+    <!-- Region Dropdown -->
     <div class="custom-dropdown" id="region-dropdown">
-      <button class="dropdown-btn" data-value="">Select Region <span class="arrow">&#9662;</span></button>
+      <button class="dropdown-btn" data-value="">
+        Select Region <span class="arrow">&#9662;</span>
+      </button>
       <ul class="dropdown-menu">
         <li data-value="">All</li>
-        <li data-value="lisboa">Lisboa</li>
-        <li data-value="porto">Porto</li>
-        <li data-value="algarve">Algarve</li>
+        {% for block in section.blocks %}
+          {% if block.type == 'region_option' %}
+            <li data-value="{{ block.settings.label | downcase }}">
+              {{ block.settings.label }}
+            </li>
+          {% endif %}
+        {% endfor %}
       </ul>
     </div>
   </div>
+  
 
   <input type="text" id="keyword-search" class="filter-input" placeholder="Enter keyword...">
 </div>
