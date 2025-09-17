@@ -27,7 +27,6 @@
     background-size: cover;
     background-position: center;
     z-index: 1;
-    filter: brightness(0.8);
   }
 
   /* Gradient overlay */
@@ -116,7 +115,7 @@
     <div class="hero_snippet_search_button custom-btn btn-5" id="customSearchBtn">Search</div>
   </div>
 
-  <div class="hero-image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}');">.</div>
+  <div class="hero-image" style="background-image: url('{{ section.settings.image | image_url: width: 2000 }}'); filter: brightness({{ section.settings.image_brightness }})">.</div>
 
 </section>
 
@@ -148,7 +147,16 @@
         "type": "image_picker",
         "id": "image",
         "label": "Background Image"
-      }
+      },
+      {
+      "type": "range",
+      "id": "image_brightness",
+      "label": "Image brightness",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.8
+    }
     ],
     "blocks": [
       {
